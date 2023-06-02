@@ -3,6 +3,10 @@ project(PinYinImeDicBuilder)
 
 set(CMAKE_CXX_STANDARD 14)
 
+#增加pthread库
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads)
+
 
 add_library(jni_pinyinime SHARED
         share/dictbuilder.cpp
@@ -38,3 +42,7 @@ add_executable(PinYinImeDicBuilder ./command/pinyinime_dictbuilder.cpp  share/di
         share/userdict.cpp
         share/utf16char.cpp
         share/utf16reader.cpp)
+
+#增加pthread库
+target_link_libraries(PinYinImeDicBuilder ${CMAKE_THREAD_LIBS_INIT})
+
